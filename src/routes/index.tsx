@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { InquirySection } from '@/components/inquiry';
 import infrastructureImage from '@/assets/ai-infrastructure.jpg';
+import founderImage from '@/assets/founder.jpeg';
 
 export const Route = createFileRoute('/')(({
   head: () => ({
@@ -138,22 +139,8 @@ function Index() {
   const [preview, setPreview] = useState<number | null>(null);
   const [stage, setStage] = useState(0);
   const [node, setNode] = useState(1);
-  const [photoSrc, setPhotoSrc] = useState('/founder.jpeg');
-  const [photoError, setPhotoError] = useState(false);
   const activeSection = useActiveSection();
   const selected = preview === null ? undefined : systems[preview];
-
-  const handlePhotoError = () => {
-    if (photoSrc === '/founder.jpeg') {
-      setPhotoSrc('/founder.jpg');
-    } else if (photoSrc === '/founder.jpg') {
-      setPhotoSrc('/founder.png');
-    } else if (photoSrc === '/founder.png') {
-      setPhotoSrc('/founder.webp');
-    } else {
-      setPhotoError(true);
-    }
-  };
 
   function closeMenu() {
     setMenu(false);
@@ -447,15 +434,13 @@ function Index() {
         <section id="about" className="section-band">
           <div className="page-width grid items-center gap-12 md:grid-cols-[.7fr_1.3fr]">
             <div className="founder-monogram">
-              {!photoError ? (
-                <img
-                  src={photoSrc}
-                  alt="IQSAN — AI Engineer & Startup Founder"
-                  onError={handlePhotoError}
-                />
-              ) : (
-                <span>[i]</span>
-              )}
+              <img
+                src={founderImage}
+                alt="IQSAN — AI Engineer & Startup Founder"
+                width={400}
+                height={348}
+                loading="lazy"
+              />
               <div className="founder-overlay" />
               <p className="absolute bottom-5 left-5 z-10 font-mono text-[9px] text-muted-foreground bg-background/80 px-2 py-0.5 rounded backdrop-blur-sm border border-border/60">
                 ENGINEER. BUILDER. FOUNDER.
