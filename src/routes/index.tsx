@@ -142,6 +142,18 @@ function Index() {
   const activeSection = useActiveSection();
   const selected = preview === null ? undefined : systems[preview];
 
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      if ('scrollRestoration' in window.history) {
+        window.history.scrollRestoration = 'manual';
+      }
+      window.scrollTo(0, 0);
+      if (window.location.hash) {
+        history.replaceState(null, '', window.location.pathname + window.location.search);
+      }
+    }
+  }, []);
+
   function closeMenu() {
     setMenu(false);
   }
